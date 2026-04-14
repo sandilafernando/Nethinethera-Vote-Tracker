@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: #050917;">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,11 +28,14 @@
 
     body {
       min-height: 100vh;
+      min-height: -webkit-fill-available;
       font-family: "Inter", sans-serif;
-      background:
+      background-color: #050917; /* Explicitly set dark background */
+      background-image: 
         radial-gradient(circle at 15% 15%, rgba(85,125,255,0.22), transparent 40%),
         radial-gradient(circle at 85% 0%, rgba(87,224,255,0.15), transparent 35%),
         linear-gradient(155deg, #040812 0%, #090f21 45%, #050917 100%);
+      background-attachment: fixed; /* Ensures background stays put while scrolling */
       color: var(--text-main);
       padding: 16px 14px 90px;
       overflow-x: hidden;
@@ -147,6 +150,7 @@
       gap: 10px;
       align-items: flex-end;   /* align to bottom so podiums rise naturally */
       min-height: 280px;
+      padding-bottom: 20px;    /* 5mm+ gap from bottom of big box */
     }
 
     /* Order: HTML order is 1st,2nd,3rd → reorder via CSS */
@@ -318,7 +322,12 @@
     }
 
     /* ─── Status / footer ─────────────────────────────────── */
-    .status { font-size: 0.84rem; color: var(--text-muted); padding: 12px 0 0; }
+    .status { 
+      font-size: 0.84rem; 
+      color: var(--text-muted); 
+      padding-top: 20px; /* 5mm gap from last candidate */
+      margin-top: 10px;
+    }
     .footer {
       text-align: center; padding: 18px 10px 6px;
       color: var(--text-muted); font-size: 0.84rem;
@@ -400,6 +409,7 @@
         gap: 6px;
         align-items: flex-end;
         min-height: 200px;
+        padding-bottom: 15px; /* compact bottom gap for mobile */
       }
       .podium-item.podium-gold   { min-height: 200px; }
       .podium-item.podium-silver { min-height: 162px; }
@@ -449,7 +459,6 @@
 
   <main class="dashboard" id="dashboard">
 
-    <!-- Header -->
     <section class="glass header">
       <div class="title-block">
         <h1>Nethinethera Vote Tracker</h1>
@@ -468,7 +477,6 @@
       </div>
     </section>
 
-    <!-- Countdown (separate row for clean layout) -->
     <section class="glass countdown-row" style="padding:12px 18px 14px;">
       <div class="countdown">
         <div class="label">Countdown to April 21, 2026</div>
@@ -476,13 +484,11 @@
       </div>
     </section>
 
-    <!-- Podium -->
     <section class="glass podium-card">
       <h2 class="section-title">Top 3 Podium 🏆</h2>
       <div id="podium" class="podium-grid"></div>
     </section>
 
-    <!-- Leaderboard -->
     <section class="glass leaderboard-card">
       <h2 class="section-title">Leaderboard</h2>
       <div id="board" class="board-list"></div>
