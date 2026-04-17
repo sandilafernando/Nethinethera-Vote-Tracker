@@ -315,6 +315,7 @@
     .share-fab-wrap {
       position: fixed; right: 14px; bottom: 14px;
       display: flex; flex-direction: column; gap: 8px; z-index: 50;
+      align-items: flex-end;
     }
     .fab-btn {
       width: 46px; height: 46px; border-radius: 999px;
@@ -327,6 +328,214 @@
     }
     .fab-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(104,167,255,0.45); }
     .fab-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* Gap FAB */
+    .gap-fab {
+      width: auto; min-width: 46px; height: 46px;
+      border-radius: 999px; padding: 0 16px;
+      border: 1px solid rgba(255,190,100,0.55);
+      background: linear-gradient(135deg, rgba(255,160,50,0.55), rgba(255,100,80,0.4));
+      color: #fff9ee; font-size: 0.82rem; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+      letter-spacing: 0.3px; white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(255,140,60,0.3);
+      position: relative; overflow: hidden;
+    }
+    .gap-fab::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.18) 50%, transparent 80%);
+      transform: translateX(-130%);
+      animation: gapFabShimmer 2.8s linear infinite;
+    }
+    @keyframes gapFabShimmer { to { transform: translateX(130%); } }
+    .gap-fab:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(255,140,60,0.55); }
+    .gap-fab-icon { font-size: 1.1rem; }
+
+    /* Gap modal overlay */
+    .gap-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(3,8,22,0.88);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      display: flex; align-items: flex-end; justify-content: center;
+      padding: 0;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .gap-overlay.open { opacity: 1; pointer-events: all; }
+
+    .gap-sheet {
+      width: 100%; max-width: 520px;
+      background: linear-gradient(145deg, rgba(18,28,56,0.97), rgba(10,18,38,0.98));
+      border: 1px solid rgba(180,198,255,0.2);
+      border-bottom: none;
+      border-radius: 22px 22px 0 0;
+      padding: 20px 20px 30px;
+      transform: translateY(100%);
+      transition: transform 0.42s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 -20px 60px rgba(0,0,0,0.6);
+      max-height: 96vh; overflow-y: auto;
+    }
+    .gap-overlay.open .gap-sheet {
+      transform: translateY(0);
+    }
+
+    .gap-handle {
+      width: 38px; height: 4px; border-radius: 999px;
+      background: rgba(180,200,255,0.3);
+      margin: 0 auto 16px;
+    }
+
+    .gap-title {
+      font-size: 1.05rem; font-weight: 800; color: #f0f4ff;
+      margin-bottom: 4px; text-align: center;
+    }
+    .gap-subtitle {
+      font-size: 0.78rem; color: var(--text-muted);
+      text-align: center; margin-bottom: 18px;
+    }
+
+    .gap-selectors {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 10px; align-items: center; margin-bottom: 20px;
+    }
+    .gap-vs {
+      font-size: 0.78rem; font-weight: 800; color: var(--text-muted);
+      text-align: center; letter-spacing: 1px;
+    }
+    .gap-select {
+      width: 100%; padding: 10px 12px;
+      border-radius: 12px; border: 1px solid rgba(140,170,255,0.3);
+      background: rgba(20,32,60,0.8); color: #e8eeff;
+      font-size: 0.82rem; font-family: "Inter", sans-serif; font-weight: 600;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a5b4d6' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+      cursor: pointer; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .gap-select:focus { border-color: rgba(100,160,255,0.6); box-shadow: 0 0 0 3px rgba(80,130,255,0.15); }
+    .gap-select option { background: #0d1630; color: #e8eeff; }
+
+    /* Result card */
+    .gap-result-wrap { min-height: 200px; }
+    #gapResult {
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(180,198,255,0.18);
+      background: rgba(14,22,46,0.9);
+    }
+
+    /* Gap card itself (also used for capture) */
+    .gap-card {
+      padding: 22px 18px 18px;
+    }
+    .gap-card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 18px;
+    }
+    .gap-card-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+    .gap-card-event {
+      font-size: 0.7rem; color: rgba(140,165,220,0.7); text-align: right;
+    }
+
+    .gap-school-row {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .gap-school-logo-wrap {
+      width: 48px; height: 48px; flex-shrink: 0; position: relative;
+    }
+    .gap-school-logo-img {
+      width: 48px; height: 48px; border-radius: 12px;
+      object-fit: contain; border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+    }
+    .gap-school-logo-fb {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 800; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(90,144,255,0.5), rgba(140,200,255,0.35));
+      border: 1px solid rgba(255,255,255,0.15); color: #eef4ff;
+    }
+    .gap-school-info { flex: 1; min-width: 0; }
+    .gap-school-name { font-size: 0.9rem; font-weight: 700; color: #e8eeff; line-height: 1.3; }
+    .gap-school-mu { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+    .gap-school-votes { flex-shrink: 0; font-size: 1.5rem; font-weight: 800; }
+
+    .gap-bar-section { margin: 14px 0 10px; }
+    .gap-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .gap-bar-label { font-size: 0.68rem; font-weight: 600; color: var(--text-muted); width: 24px; text-align: right; flex-shrink: 0; }
+    .gap-bar-track { flex: 1; height: 12px; border-radius: 999px; background: rgba(132,161,238,0.12); overflow: hidden; position: relative; }
+    .gap-bar-fill { height: 100%; border-radius: inherit; width: 0%; transition: width 0.9s cubic-bezier(0.34,1.56,0.64,1); }
+    .gap-bar-fill.school-a { background: linear-gradient(90deg, #3a6fd8, #5a90ff, #8fc2ff); animation: barPulse 2.4s ease-in-out infinite; }
+    .gap-bar-fill.school-b { background: linear-gradient(90deg, #d8623a, #ff8a5a, #ffb58f); animation: barPulseOrange 2.4s ease-in-out infinite; }
+    @keyframes barPulseOrange {
+      0%,100% { box-shadow: 0 0 10px rgba(255,130,60,0.4); }
+      50% { box-shadow: 0 0 20px rgba(255,130,60,0.7); }
+    }
+
+    .gap-number-section {
+      margin-top: 16px; padding: 14px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(180,198,255,0.12);
+      display: flex; flex-direction: column; gap: 10px;
+      position: relative; overflow: hidden;
+    }
+    .gap-number-section::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(100,160,255,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    .gap-number-row {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .gap-number-key {
+      font-size: 0.72rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.4px;
+    }
+    .gap-number-val {
+      font-size: 1rem; font-weight: 800; color: #e0ecff;
+    }
+    .gap-number-val.gap-val {
+      font-size: 1.25rem; color: #ffcc4d;
+      text-shadow: 0 0 16px rgba(255,204,77,0.4);
+    }
+    .gap-number-val.leader-val { color: #6dffaa; }
+    .gap-divider { height: 1px; background: rgba(180,198,255,0.1); }
+
+    .gap-watermark {
+      text-align: center; margin-top: 14px;
+      font-size: 0.66rem; color: rgba(140,165,220,0.45);
+      letter-spacing: 0.4px;
+    }
+
+    /* Action buttons in gap sheet */
+    .gap-actions {
+      display: flex; gap: 10px; margin-top: 18px;
+    }
+    .gap-action-btn {
+      flex: 1; padding: 11px 14px; border-radius: 12px;
+      border: 1px solid rgba(140,170,255,0.3);
+      background: rgba(30,50,90,0.7);
+      color: #d8e8ff; font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      font-family: "Inter", sans-serif;
+    }
+    .gap-action-btn:hover { background: rgba(50,80,140,0.8); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(80,130,255,0.25); }
+    .gap-action-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .gap-action-btn.share-btn { border-color: rgba(100,220,160,0.35); }
+    .gap-action-btn.download-btn { border-color: rgba(100,160,255,0.35); }
+
+    .gap-placeholder {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 40px 20px; gap: 10px; color: var(--text-muted);
+      font-size: 0.85rem; text-align: center;
+    }
+    .gap-placeholder-icon { font-size: 2.4rem; opacity: 0.5; }
 
     @keyframes shimmer { to { transform: translateX(130%); } }
     @keyframes barPulse {
@@ -464,8 +673,44 @@
   </main>
 
   <div class="share-fab-wrap">
+    <button id="gapBtn" class="gap-fab" type="button" title="Compare Schools" aria-label="Compare Schools">
+      <span class="gap-fab-icon">⚡</span> Gap Analyzer
+    </button>
     <button id="shareBtn"    class="fab-btn" type="button" title="Share PNG"    aria-label="Share PNG">🚀</button>
     <button id="downloadBtn" class="fab-btn" type="button" title="Download PNG" aria-label="Download PNG">📥</button>
+  </div>
+
+  <!-- Gap Analyzer Modal -->
+  <div class="gap-overlay" id="gapOverlay" role="dialog" aria-modal="true" aria-label="Gap Analyzer">
+    <div class="gap-sheet" id="gapSheet">
+      <div class="gap-handle"></div>
+      <div class="gap-title">⚡ Gap Analyzer</div>
+      <div class="gap-subtitle">Compare any two schools side by side</div>
+
+      <div class="gap-selectors">
+        <select class="gap-select" id="gapSelectA" aria-label="School A">
+          <option value="">— School A —</option>
+        </select>
+        <div class="gap-vs">VS</div>
+        <select class="gap-select" id="gapSelectB" aria-label="School B">
+          <option value="">— School B —</option>
+        </select>
+      </div>
+
+      <div class="gap-result-wrap">
+        <div id="gapResult">
+          <div class="gap-placeholder">
+            <div class="gap-placeholder-icon">🏫</div>
+            <div>Select two schools above to see the gap</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gap-actions" id="gapActions" style="display:none">
+        <button class="gap-action-btn share-btn" id="gapShareBtn" type="button">🚀 Share</button>
+        <button class="gap-action-btn download-btn" id="gapDownloadBtn" type="button">📥 Download</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -658,6 +903,7 @@
     updateChip(sortedVotes);
     animateInitialEntry();
     hasInitialRender = true;
+    currentVotesData = sortedVotes;
 
     const now = new Date();
     statusEl.textContent = `Live · Updated ${now.toLocaleTimeString()}`;
@@ -713,6 +959,7 @@
 
     updateChip(sortedVotes);
     statusEl.textContent = `Auto-updated ${new Date().toLocaleTimeString()}`;
+    currentVotesData = sortedVotes;
   }
 
   async function loadVotes() {
@@ -734,54 +981,289 @@
     }
   }
 
-  async function capture() {
-    const isMobile  = window.innerWidth <= 640;
-    const dashboard = document.querySelector(".dashboard");
+  async function captureElement(el, opts = {}) {
+    // Wait for any images inside el to finish loading
+    const imgs = Array.from(el.querySelectorAll("img"));
+    await Promise.allSettled(imgs.map(img => img.complete ? Promise.resolve() : new Promise(r => { img.onload = r; img.onerror = r; })));
 
-    if (isMobile) {
-      const W = 1080, H = 1920;
-      const orig = { width: dashboard.style.width, maxWidth: dashboard.style.maxWidth, transform: dashboard.style.transform, overflow: dashboard.style.overflow };
-      dashboard.style.width    = W + "px";
-      dashboard.style.maxWidth = W + "px";
-      dashboard.style.transform = "none";
-      dashboard.style.overflow = "visible";
-      const canvas = await html2canvas(dashboard, {
-        scale: 1, useCORS: true, backgroundColor: "#050917",
-        width: W, height: H, windowWidth: W, windowHeight: H,
-        scrollY: 0
-      });
-      dashboard.style.width    = orig.width;
-      dashboard.style.maxWidth = orig.maxWidth;
-      dashboard.style.transform = orig.transform;
-      dashboard.style.overflow = orig.overflow;
-      return canvas.toDataURL("image/png");
-    }
-    const canvas = await html2canvas(dashboard, { scale:2, useCORS:true, backgroundColor:"#050917" });
+    const scale = opts.scale || 3;
+    const canvas = await html2canvas(el, {
+      scale,
+      useCORS: true,
+      allowTaint: false,
+      backgroundColor: opts.bg || "#050917",
+      logging: false,
+      imageTimeout: 8000,
+      onclone: (doc, clone) => {
+        // Ensure cloned el is fully visible
+        clone.style.opacity = "1";
+        clone.style.transform = "none";
+        // For gap card, ensure proper sizing
+        if (opts.fixWidth) {
+          clone.style.width = opts.fixWidth + "px";
+          clone.style.maxWidth = opts.fixWidth + "px";
+        }
+      }
+    });
     return canvas.toDataURL("image/png");
+  }
+
+  async function capture() {
+    const dashboard = document.querySelector(".dashboard");
+    const isMobile  = window.innerWidth <= 640;
+    const scale = isMobile ? 2 : 3;
+    const canvas = await html2canvas(dashboard, {
+      scale,
+      useCORS: true,
+      allowTaint: false,
+      backgroundColor: "#050917",
+      logging: false,
+      imageTimeout: 8000,
+      scrollX: 0, scrollY: -window.scrollY,
+    });
+    return canvas.toDataURL("image/png");
+  }
+
+  async function doShare(dataUrl, filename, title) {
+    try {
+      const res  = await fetch(dataUrl);
+      const blob = await res.blob();
+      const file = new File([blob], filename, { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title });
+      } else {
+        // Fallback: download
+        const a = document.createElement("a");
+        a.href = dataUrl; a.download = filename; a.click();
+      }
+    } catch(e) { /* user dismissed or not supported */ }
+  }
+
+  async function doDownload(dataUrl, filename) {
+    const a = document.createElement("a");
+    a.href = dataUrl; a.download = filename; a.click();
   }
 
   shareBtn.onclick = async () => {
     shareBtn.disabled = true;
-    try {
-      const img  = await capture();
-      const res  = await fetch(img);
-      const blob = await res.blob();
-      const file = new File([blob], "votes.png", { type:"image/png" });
-      if (navigator.canShare && navigator.canShare({ files:[file] })) {
-        await navigator.share({ files:[file], title:"Nethinethera Vote Tracker" });
-      } else {
-        alert("Sharing not supported — use the download button instead.");
-      }
-    } catch (e) { }
+    shareBtn.textContent = "⏳";
+    const img = await capture();
+    await doShare(img, "votes.png", "Nethinethera Vote Tracker");
+    shareBtn.textContent = "🚀";
     shareBtn.disabled = false;
   };
 
   downloadBtn.onclick = async () => {
     downloadBtn.disabled = true;
-    const a = document.createElement("a");
-    a.href = await capture(); a.download = "votes.png"; a.click();
+    downloadBtn.textContent = "⏳";
+    const img = await capture();
+    await doDownload(img, "votes.png");
+    downloadBtn.textContent = "📥";
     downloadBtn.disabled = false;
   };
+
+  // ─── Gap Analyzer ───────────────────────────────────────────────────────────
+
+  let currentVotesData = [];
+
+  const gapBtn      = document.getElementById("gapBtn");
+  const gapOverlay  = document.getElementById("gapOverlay");
+  const gapSelectA  = document.getElementById("gapSelectA");
+  const gapSelectB  = document.getElementById("gapSelectB");
+  const gapResult   = document.getElementById("gapResult");
+  const gapActions  = document.getElementById("gapActions");
+  const gapShareBtn = document.getElementById("gapShareBtn");
+  const gapDownloadBtn = document.getElementById("gapDownloadBtn");
+
+  function openGap() {
+    // Populate selects
+    [gapSelectA, gapSelectB].forEach(sel => {
+      const prev = sel.value;
+      sel.innerHTML = '<option value="">— Select —</option>' +
+        currentVotesData.map(v => {
+          const m = getSchoolMeta(v.registered_candidate);
+          return `<option value="${v.registered_candidate}">${m.school.split(",")[0]}</option>`;
+        }).join("");
+      if (prev) sel.value = prev;
+    });
+    gapOverlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeGap() {
+    gapOverlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  gapBtn.addEventListener("click", openGap);
+  gapOverlay.addEventListener("click", e => { if (e.target === gapOverlay) closeGap(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeGap(); });
+
+  function buildGapCard(vA, vB) {
+    const metaA = getSchoolMeta(vA.registered_candidate);
+    const metaB = getSchoolMeta(vB.registered_candidate);
+    const maxV  = Math.max(vA.vote_count, vB.vote_count, 1);
+    const gap   = Math.abs(vA.vote_count - vB.vote_count);
+    const leader = vA.vote_count >= vB.vote_count ? metaA : metaB;
+    const pctA  = (vA.vote_count / maxV) * 100;
+    const pctB  = (vB.vote_count / maxV) * 100;
+
+    function logoHtml(meta, cls) {
+      const initials = getInitials(meta.school);
+      if (meta.logo) {
+        return `<img class="gap-school-logo-img ${cls}" src="${escapeHtml(meta.logo)}" alt="${escapeHtml(meta.school)}" crossorigin="anonymous"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="gap-school-logo-fb" style="display:none">${escapeHtml(initials)}</div>`;
+      }
+      return `<div class="gap-school-logo-fb">${escapeHtml(initials)}</div>`;
+    }
+
+    const now = new Date();
+    const ts  = now.toLocaleDateString("en-GB", { day:"numeric", month:"short" }) + " · " + now.toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" });
+
+    return `<div class="gap-card" id="gapCardInner">
+      <div class="gap-card-header">
+        <div class="gap-card-label">⚡ Gap Analysis</div>
+        <div class="gap-card-event">EMUMSC NETHINETHERA · ${escapeHtml(ts)}</div>
+      </div>
+
+      <!-- School A -->
+      <div class="gap-school-row">
+        <div class="gap-school-logo-wrap">${logoHtml(metaA, "logo-a")}</div>
+        <div class="gap-school-info">
+          <div class="gap-school-name">${escapeHtml(metaA.school.split(",")[0])}</div>
+          ${metaA.mediaUnit ? `<div class="gap-school-mu">${escapeHtml(metaA.mediaUnit)}</div>` : ""}
+        </div>
+        <div class="gap-school-votes" style="color:#8fc2ff">${vA.vote_count.toLocaleString()}</div>
+      </div>
+
+      <!-- School B -->
+      <div class="gap-school-row">
+        <div class="gap-school-logo-wrap">${logoHtml(metaB, "logo-b")}</div>
+        <div class="gap-school-info">
+          <div class="gap-school-name">${escapeHtml(metaB.school.split(",")[0])}</div>
+          ${metaB.mediaUnit ? `<div class="gap-school-mu">${escapeHtml(metaB.mediaUnit)}</div>` : ""}
+        </div>
+        <div class="gap-school-votes" style="color:#ffb58f">${vB.vote_count.toLocaleString()}</div>
+      </div>
+
+      <!-- Bars -->
+      <div class="gap-bar-section">
+        <div class="gap-bar-row">
+          <div class="gap-bar-label" style="color:#8fc2ff">A</div>
+          <div class="gap-bar-track"><div class="gap-bar-fill school-a" data-pct="${pctA}" style="width:0%"></div></div>
+        </div>
+        <div class="gap-bar-row">
+          <div class="gap-bar-label" style="color:#ffb58f">B</div>
+          <div class="gap-bar-track"><div class="gap-bar-fill school-b" data-pct="${pctB}" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <!-- Numbers -->
+      <div class="gap-number-section">
+        <div class="gap-number-row">
+          <div class="gap-number-key">Vote Gap</div>
+          <div class="gap-number-val gap-val" id="gapValDisplay">0</div>
+        </div>
+        <div class="gap-divider"></div>
+        <div class="gap-number-row">
+          <div class="gap-number-key">Currently Leading</div>
+          <div class="gap-number-val leader-val">${escapeHtml(leader.school.split(",")[0])}</div>
+        </div>
+        <div class="gap-divider"></div>
+        <div class="gap-number-row">
+          <div class="gap-number-key">${escapeHtml(metaA.school.split(",")[0])}</div>
+          <div class="gap-number-val">${vA.vote_count.toLocaleString()} votes</div>
+        </div>
+        <div class="gap-number-row">
+          <div class="gap-number-key">${escapeHtml(metaB.school.split(",")[0])}</div>
+          <div class="gap-number-val">${vB.vote_count.toLocaleString()} votes</div>
+        </div>
+      </div>
+
+      <div class="gap-watermark">Educational Media Unit of Maris Stella College Negombo · EMUMSC</div>
+    </div>`;
+  }
+
+  function animateGapCard(gap) {
+    // Animate bars
+    requestAnimationFrame(() => {
+      gapResult.querySelectorAll(".gap-bar-fill").forEach(b => {
+        b.style.width = "0%";
+        setTimeout(() => { b.style.width = b.dataset.pct + "%"; }, 60);
+      });
+      // Animate counter
+      const el = document.getElementById("gapValDisplay");
+      if (!el) return;
+      let start = 0; const end = gap; const dur = 900;
+      const step = ts => {
+        if (!step.s) step.s = ts;
+        const progress = Math.min((ts - step.s) / dur, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * end).toLocaleString();
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }
+
+  function renderGap() {
+    const idA = Number(gapSelectA.value);
+    const idB = Number(gapSelectB.value);
+    if (!idA || !idB || idA === idB) {
+      gapResult.innerHTML = `<div class="gap-placeholder"><div class="gap-placeholder-icon">🏫</div><div>${idA === idB && idA ? "Please select two different schools" : "Select two schools above"}</div></div>`;
+      gapActions.style.display = "none";
+      return;
+    }
+    const vA = currentVotesData.find(v => v.registered_candidate === idA);
+    const vB = currentVotesData.find(v => v.registered_candidate === idB);
+    if (!vA || !vB) return;
+
+    const gap = Math.abs(vA.vote_count - vB.vote_count);
+    gapResult.innerHTML = buildGapCard(vA, vB);
+    gapActions.style.display = "flex";
+    animateGapCard(gap);
+
+    // Entry animation
+    gsap.from("#gapCardInner", { y: 20, opacity: 0, duration: 0.4, ease: "back.out(1.6)" });
+    gsap.from("#gapCardInner .gap-school-row", { x: -14, opacity: 0, duration: 0.35, stagger: 0.1, ease: "power2.out", delay: 0.15 });
+    gsap.from("#gapCardInner .gap-number-section", { y: 10, opacity: 0, duration: 0.35, ease: "power2.out", delay: 0.3 });
+  }
+
+  gapSelectA.addEventListener("change", renderGap);
+  gapSelectB.addEventListener("change", renderGap);
+
+  async function captureGapCard() {
+    const card = document.getElementById("gapCardInner");
+    if (!card) return null;
+    // Temporarily set bars to their final width for static capture
+    card.querySelectorAll(".gap-bar-fill").forEach(b => { b.style.transition = "none"; b.style.width = b.dataset.pct + "%"; });
+    // Wait a frame
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(r => setTimeout(r, 80));
+    const dataUrl = await captureElement(card, { scale: 3, bg: "#0d1630", fixWidth: card.offsetWidth });
+    // Restore
+    card.querySelectorAll(".gap-bar-fill").forEach(b => { b.style.transition = ""; });
+    return dataUrl;
+  }
+
+  gapShareBtn.addEventListener("click", async () => {
+    gapShareBtn.disabled = true;
+    gapShareBtn.textContent = "⏳ Sharing…";
+    const img = await captureGapCard();
+    if (img) await doShare(img, "gap-analysis.png", "NETHINETHERA Vote Gap Analysis");
+    gapShareBtn.textContent = "🚀 Share";
+    gapShareBtn.disabled = false;
+  });
+
+  gapDownloadBtn.addEventListener("click", async () => {
+    gapDownloadBtn.disabled = true;
+    gapDownloadBtn.textContent = "⏳ Saving…";
+    const img = await captureGapCard();
+    if (img) await doDownload(img, "gap-analysis.png");
+    gapDownloadBtn.textContent = "📥 Download";
+    gapDownloadBtn.disabled = false;
+  });
 
   initOrbs();
   renderCountdown();
