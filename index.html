@@ -26,22 +26,23 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { height: 100%; }
+
     body {
       min-height: 100vh;
-      min-height: -webkit-fill-available;
       font-family: "Inter", sans-serif;
       background-color: #050917;
-      background-image: 
+      background-image:
         radial-gradient(circle at 15% 15%, rgba(85,125,255,0.22), transparent 40%),
         radial-gradient(circle at 85% 0%, rgba(87,224,255,0.15), transparent 35%),
         linear-gradient(155deg, #040812 0%, #090f21 45%, #050917 100%);
       background-attachment: fixed;
       color: var(--text-main);
-      padding: 16px 14px 90px;
       overflow-x: hidden;
       position: relative;
     }
 
+    /* ─── BACKGROUND ORBS ─── */
     .bg-orb {
       position: fixed; border-radius: 999px;
       filter: blur(60px); pointer-events: none; z-index: -1; opacity: 0;
@@ -51,8 +52,47 @@
     .bg-orb.orb-3 { width:260px;height:260px;background:radial-gradient(circle,rgba(255,196,94,0.45),rgba(200,130,50,0.2));top:40%;right:30%; }
     .bg-orb.orb-4 { width:200px;height:200px;background:radial-gradient(circle,rgba(180,100,255,0.35),rgba(120,60,200,0.15));top:20%;left:60%; }
 
-    .dashboard { max-width: 1100px; margin: 0 auto; display: grid; gap: 16px; }
+    /* ─── DESKTOP 16:9 LAYOUT ─── */
+    .page-wrap {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px 20px 100px;
+    }
 
+    .dashboard {
+      width: 100%;
+      max-width: 1400px;
+      display: grid;
+      gap: 14px;
+    }
+
+    /* Desktop: header row */
+    .dashboard-header-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    /* Desktop: main content row — podium left, leaderboard right */
+    .dashboard-main-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .dashboard-left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    /* ─── GLASS CARDS ─── */
     .glass {
       background: linear-gradient(145deg, var(--bg-card), var(--bg-card-2));
       border: 1px solid var(--line);
@@ -62,13 +102,14 @@
       -webkit-backdrop-filter: blur(12px);
     }
 
+    /* ─── HEADER ─── */
     .header {
       display: flex; flex-wrap: wrap; gap: 10px;
       justify-content: space-between; align-items: flex-start;
-      padding: 16px 18px;
+      padding: 16px 22px;
     }
     .title-block h1 {
-      font-size: clamp(1.2rem, 3.5vw, 2rem);
+      font-size: clamp(1.1rem, 2.5vw, 1.7rem);
       font-weight: 800; letter-spacing: 0.2px;
     }
     .title-block p { color: var(--text-muted); margin-top: 4px; font-size: 0.88rem; }
@@ -88,8 +129,7 @@
     }
     .live-dot {
       width: 7px; height: 7px; border-radius: 50%;
-      background: #4eff9a;
-      box-shadow: 0 0 6px #4eff9a;
+      background: #4eff9a; box-shadow: 0 0 6px #4eff9a;
       animation: livePulse 1.6s ease-in-out infinite;
     }
     @keyframes livePulse {
@@ -107,7 +147,7 @@
     }
     .top-school-chip .chip-name {
       font-size: 0.82rem; font-weight: 700; color: #ffe07a;
-      line-height: 1.3; max-width: 180px;
+      line-height: 1.3; max-width: 200px;
     }
     .top-school-chip .chip-stats {
       font-size: 0.72rem; color: var(--text-muted);
@@ -116,42 +156,51 @@
     .chip-stat-item { display: flex; align-items: center; gap: 3px; }
     .chip-stat-item strong { color: #c7d7ff; }
 
+    /* ─── COUNTDOWN ─── */
+    .countdown-card { padding: 14px 22px; display: flex; align-items: center; justify-content: center; }
     .countdown { text-align: center; }
     .countdown .label {
       color: var(--text-muted); font-size: 0.78rem;
-      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
     }
     #countdown { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
     .time-box {
-      min-width: 50px; padding: 7px 8px; border-radius: 10px;
+      min-width: 52px; padding: 8px 10px; border-radius: 10px;
       border: 1px solid rgba(145,177,255,0.3);
       background: rgba(22,36,66,0.55); text-align: center;
     }
-    .time-box strong { display: block; font-size: 1.05rem; font-weight: 700; line-height: 1.2; }
+    .time-box strong { display: block; font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
     .time-box span { color: var(--text-muted); font-size: 0.68rem; letter-spacing: 0.7px; text-transform: uppercase; }
 
-    .section-title { font-size: 1rem; margin-bottom: 12px; color: #d8e3ff; font-weight: 700; }
+    /* ─── SECTION TITLE ─── */
+    .section-title { font-size: 1rem; margin-bottom: 14px; color: #d8e3ff; font-weight: 700; }
 
-    .podium-card { padding: 16px 16px 20px; }
+    /* ─── PODIUM ─── */
+    .podium-card {
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+    }
 
     .podium-grid {
       display: grid;
-      grid-template-columns: 0.82fr 1fr 0.72fr;
-      gap: 10px;
+      grid-template-columns: 0.92fr 1.08fr 0.92fr;
+      gap: 12px;
       align-items: flex-end;
-      min-height: 280px;
-      padding-bottom: 25px; /* Added 5mm+ gap from bottom */
+      min-height: 212px;
+      padding-top: 4px;
     }
 
-    .podium-item:nth-child(1) { order: 2; } 
-    .podium-item:nth-child(2) { order: 1; } 
-    .podium-item:nth-child(3) { order: 3; } 
+    .podium-item:nth-child(1) { order: 2; }
+    .podium-item:nth-child(2) { order: 1; }
+    .podium-item:nth-child(3) { order: 3; }
 
     .podium-item {
       position: relative;
       border: 1px solid rgba(170,191,255,0.22);
       border-radius: 14px;
       overflow: hidden;
+      align-self: end;
       padding: 12px 10px 10px;
       background: rgba(19,31,57,0.82);
       transform-origin: bottom center;
@@ -159,9 +208,9 @@
       display: flex;
       flex-direction: column;
     }
-    .podium-item.podium-gold   { min-height: 270px; }
-    .podium-item.podium-silver { min-height: 220px; }
-    .podium-item.podium-bronze { min-height: 190px; }
+    .podium-item.podium-gold   { min-height: 212px; }
+    .podium-item.podium-silver { min-height: 178px; }
+    .podium-item.podium-bronze { min-height: 154px; }
     .podium-item:hover { transform: translateY(-6px) !important; }
     .podium-item::before {
       content: ""; position: absolute; inset: 0;
@@ -175,9 +224,9 @@
     }
 
     .school-identity { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
-    .logo-cell { position: relative; flex-shrink: 0; width: 38px; height: 38px; }
+    .logo-cell { position: relative; flex-shrink: 0; width: 40px; height: 40px; }
     .school-logo {
-      width: 38px; height: 38px; object-fit: contain;
+      width: 40px; height: 40px; object-fit: contain;
       border-radius: 8px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12); display: block;
@@ -199,16 +248,16 @@
       word-break: break-word;
       overflow-wrap: break-word;
     }
-    .podium-item .school-title { font-size: 0.82rem; }
+    .podium-item .school-title { font-size: 0.84rem; }
     .media-unit { font-size: 0.68rem; color: var(--text-muted); margin-top: 3px; line-height: 1.3;
       word-break: break-word; overflow-wrap: break-word; }
 
-    .podium-votes { font-size: 1.35rem; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+    .podium-votes { font-size: 1.4rem; font-weight: 800; line-height: 1; margin-bottom: 4px; }
 
     .podium-height {
       margin-top: auto;
-      border-radius: 9px; width: 100%; min-height: 48px; flex: 1;
-      max-height: 140px;
+      border-radius: 9px; width: 100%; min-height: 34px;
+      max-height: 88px;
       background: rgba(255,255,255,0.05);
       position: relative; overflow: hidden;
     }
@@ -228,8 +277,8 @@
       animation: glowGold 2.8s ease-in-out infinite;
     }
     @keyframes glowGold {
-      0%,100% { box-shadow: 0 0 16px rgba(255,200,60,0.5), 0 0 36px rgba(255,200,60,0.2); }
-      50%      { box-shadow: 0 0 32px rgba(255,210,80,0.85), 0 0 64px rgba(255,200,60,0.4); }
+      0%,100% { box-shadow: 0 0 18px rgba(255,214,120,0.42), 0 0 34px rgba(255,214,120,0.18); }
+      50%      { box-shadow: 0 0 24px rgba(255,214,120,0.56), 0 0 42px rgba(255,214,120,0.24); }
     }
 
     .podium-silver { box-shadow: 0 0 20px rgba(213,223,244,0.22); }
@@ -240,8 +289,8 @@
       animation: glowSilver 3.2s ease-in-out infinite;
     }
     @keyframes glowSilver {
-      0%,100% { box-shadow: 0 0 12px rgba(200,215,244,0.35), 0 0 28px rgba(180,200,240,0.15); }
-      50%      { box-shadow: 0 0 26px rgba(215,228,255,0.65), 0 0 50px rgba(200,215,244,0.3); }
+      0%,100% { box-shadow: 0 0 16px rgba(225,233,248,0.3), 0 0 30px rgba(225,233,248,0.14); }
+      50%      { box-shadow: 0 0 22px rgba(225,233,248,0.44), 0 0 38px rgba(225,233,248,0.2); }
     }
 
     .podium-bronze { box-shadow: 0 0 20px rgba(215,155,110,0.22); }
@@ -252,8 +301,21 @@
       animation: glowBronze 3.6s ease-in-out infinite;
     }
     @keyframes glowBronze {
-      0%,100% { box-shadow: 0 0 12px rgba(210,150,100,0.35), 0 0 26px rgba(200,130,80,0.15); }
-      50%      { box-shadow: 0 0 26px rgba(220,165,115,0.65), 0 0 50px rgba(210,150,100,0.3); }
+      0%,100% { box-shadow: 0 0 16px rgba(226,183,145,0.32), 0 0 30px rgba(226,183,145,0.14); }
+      50%      { box-shadow: 0 0 22px rgba(226,183,145,0.46), 0 0 38px rgba(226,183,145,0.2); }
+    }
+
+    body.export-mode .podium-gold .podium-height span {
+      animation: none !important;
+      box-shadow: 0 0 22px rgba(255,214,120,0.5), 0 0 40px rgba(255,214,120,0.22);
+    }
+    body.export-mode .podium-silver .podium-height span {
+      animation: none !important;
+      box-shadow: 0 0 20px rgba(225,233,248,0.4), 0 0 34px rgba(225,233,248,0.18);
+    }
+    body.export-mode .podium-bronze .podium-height span {
+      animation: none !important;
+      box-shadow: 0 0 20px rgba(226,183,145,0.42), 0 0 34px rgba(226,183,145,0.18);
     }
 
     .first-badge {
@@ -262,12 +324,13 @@
       letter-spacing: 0.4px; text-transform: uppercase;
     }
 
-    .leaderboard-card { padding: 16px 16px 20px; }
+    /* ─── LEADERBOARD ─── */
+    .leaderboard-card { padding: 18px 18px 22px; }
     .board-list { display: grid; gap: 10px; }
     .board-item {
       border: 1px solid rgba(171,192,255,0.18);
       background: rgba(18,28,50,0.65);
-      border-radius: 12px; padding: 10px 12px;
+      border-radius: 12px; padding: 10px 14px;
       transition: transform 0.28s ease, border-color 0.28s ease;
     }
     .board-item:hover { transform: translateY(-4px); border-color: rgba(171,205,255,0.45); }
@@ -297,51 +360,75 @@
       animation: shimmer 2.2s linear infinite;
     }
 
-    .status { 
-      font-size: 0.84rem; 
-      color: var(--text-muted); 
-      padding-top: 25px; /* Added 5mm gap from last candidate */
-      margin-top: 10px;
+    .status {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      padding-top: 18px;
+      margin-top: 8px;
     }
     .footer {
-      text-align: center; padding: 18px 10px 6px;
-      color: var(--text-muted); font-size: 0.84rem;
+      text-align: center; padding: 12px 10px 4px;
+      color: var(--text-muted); font-size: 0.82rem;
     }
     .export-updated {
       text-align: center; color: #d7e5ff; font-size: 0.78rem;
-      margin-top: 28px; letter-spacing: 0.2px;
+      margin-top: 20px; letter-spacing: 0.2px;
     }
 
+    /* ─── FAB BUTTONS (animated text) ─── */
     .share-fab-wrap {
-      position: fixed; right: 14px; bottom: 14px;
+      position: fixed; right: 16px; bottom: 16px;
       display: flex; flex-direction: column; gap: 8px; z-index: 50;
       align-items: flex-end;
     }
+
+    /* Main share/download become animated text buttons */
     .fab-btn {
-      width: 46px; height: 46px; border-radius: 999px;
+      height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
       border: 1px solid rgba(168,197,255,0.42);
       background: linear-gradient(135deg, rgba(85,139,255,0.52), rgba(120,200,255,0.38));
-      color: #eef4ff; font-size: 1.2rem;
-      display: inline-flex; align-items: center; justify-content: center;
+      color: #eef4ff; font-size: 0.82rem; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
       cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      font-family: "Inter", sans-serif;
+      letter-spacing: 0.3px; white-space: nowrap;
+      position: relative; overflow: hidden;
       transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
     }
+    .fab-btn::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.18) 50%, transparent 80%);
+      transform: translateX(-130%);
+      animation: fabShimmer 3s linear infinite;
+    }
+    @keyframes fabShimmer { to { transform: translateX(130%); } }
     .fab-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(104,167,255,0.45); }
     .fab-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+    .fab-btn .fab-icon { font-size: 1rem; }
+
+    /* Download button slight variant */
+    #downloadBtn {
+      border-color: rgba(130,210,255,0.45);
+      background: linear-gradient(135deg, rgba(60,140,255,0.5), rgba(100,200,255,0.36));
+    }
+    #downloadBtn:hover { box-shadow: 0 8px 22px rgba(60,180,255,0.4); }
 
     /* Gap FAB */
     .gap-fab {
-      width: auto; min-width: 46px; height: 46px;
-      border-radius: 999px; padding: 0 16px;
+      height: 46px;
+      border-radius: 999px; padding: 0 18px;
       border: 1px solid rgba(255,190,100,0.55);
       background: linear-gradient(135deg, rgba(255,160,50,0.55), rgba(255,100,80,0.4));
-      color: #fff9ee; font-size: 0.82rem; font-weight: 700;
-      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      color: #fff9ee; font-size: 0.84rem; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
       cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       letter-spacing: 0.3px; white-space: nowrap;
       box-shadow: 0 4px 20px rgba(255,140,60,0.3);
       position: relative; overflow: hidden;
+      font-family: "Inter", sans-serif;
     }
     .gap-fab::before {
       content: ""; position: absolute; inset: 0;
@@ -353,7 +440,7 @@
     .gap-fab:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(255,140,60,0.55); }
     .gap-fab-icon { font-size: 1.1rem; }
 
-    /* Gap modal overlay */
+    /* ─── GAP OVERLAY ─── */
     .gap-overlay {
       position: fixed; inset: 0; z-index: 200;
       background: rgba(3,8,22,0.88);
@@ -361,19 +448,19 @@
       display: flex; align-items: flex-end; justify-content: center;
       padding: 0;
       opacity: 0; pointer-events: none;
-      transition: opacity 0.35s ease;
+      transition: opacity 0.65s ease; /* SLOWED */
     }
     .gap-overlay.open { opacity: 1; pointer-events: all; }
 
     .gap-sheet {
-      width: 100%; max-width: 520px;
+      width: 100%; max-width: 540px;
       background: linear-gradient(145deg, rgba(18,28,56,0.97), rgba(10,18,38,0.98));
       border: 1px solid rgba(180,198,255,0.2);
       border-bottom: none;
       border-radius: 22px 22px 0 0;
-      padding: 20px 20px 30px;
+      padding: 22px 22px 32px;
       transform: translateY(100%);
-      transition: transform 0.42s cubic-bezier(0.34,1.56,0.64,1);
+      transition: transform 0.75s cubic-bezier(0.34,1.56,0.64,1); /* SLOWED */
       box-shadow: 0 -20px 60px rgba(0,0,0,0.6);
       max-height: 96vh; overflow-y: auto;
     }
@@ -384,7 +471,7 @@
     .gap-handle {
       width: 38px; height: 4px; border-radius: 999px;
       background: rgba(180,200,255,0.3);
-      margin: 0 auto 16px;
+      margin: 0 auto 18px;
     }
 
     .gap-title {
@@ -393,7 +480,7 @@
     }
     .gap-subtitle {
       font-size: 0.78rem; color: var(--text-muted);
-      text-align: center; margin-bottom: 18px;
+      text-align: center; margin-bottom: 20px;
     }
 
     .gap-selectors {
@@ -426,10 +513,28 @@
       background: rgba(14,22,46,0.9);
     }
 
-    /* Gap card itself (also used for capture) */
-    .gap-card {
-      padding: 22px 18px 18px;
+    .desktop-gap-card {
+      display: none;
+      padding: 16px 18px 18px;
     }
+
+    .desktop-gap-card .gap-subtitle {
+      text-align: left;
+      margin-bottom: 16px;
+    }
+
+    .desktop-gap-card .gap-result-wrap {
+      min-height: 0;
+    }
+
+    #desktopGapResult {
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(180,198,255,0.18);
+      background: rgba(14,22,46,0.9);
+    }
+
+    /* Gap card */
+    .gap-card { padding: 22px 18px 18px; }
     .gap-card-header {
       display: flex; justify-content: space-between; align-items: center;
       margin-bottom: 18px;
@@ -438,17 +543,13 @@
       font-size: 0.68rem; font-weight: 700; letter-spacing: 1.2px;
       text-transform: uppercase; color: var(--text-muted);
     }
-    .gap-card-event {
-      font-size: 0.7rem; color: rgba(140,165,220,0.7); text-align: right;
-    }
+    .gap-card-event { font-size: 0.7rem; color: rgba(140,165,220,0.7); text-align: right; }
 
     .gap-school-row {
       display: flex; align-items: center; gap: 12px;
       margin-bottom: 12px;
     }
-    .gap-school-logo-wrap {
-      width: 48px; height: 48px; flex-shrink: 0; position: relative;
-    }
+    .gap-school-logo-wrap { width: 48px; height: 48px; flex-shrink: 0; position: relative; }
     .gap-school-logo-img {
       width: 48px; height: 48px; border-radius: 12px;
       object-fit: contain; border: 1px solid rgba(255,255,255,0.15);
@@ -469,7 +570,8 @@
     .gap-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
     .gap-bar-label { font-size: 0.68rem; font-weight: 600; color: var(--text-muted); width: 24px; text-align: right; flex-shrink: 0; }
     .gap-bar-track { flex: 1; height: 12px; border-radius: 999px; background: rgba(132,161,238,0.12); overflow: hidden; position: relative; }
-    .gap-bar-fill { height: 100%; border-radius: inherit; width: 0%; transition: width 0.9s cubic-bezier(0.34,1.56,0.64,1); }
+    /* SLOWED: bar transition from 0.9s to 1.6s */
+    .gap-bar-fill { height: 100%; border-radius: inherit; width: 0%; transition: width 1.6s cubic-bezier(0.34,1.56,0.64,1); }
     .gap-bar-fill.school-a { background: linear-gradient(90deg, #3a6fd8, #5a90ff, #8fc2ff); animation: barPulse 2.4s ease-in-out infinite; }
     .gap-bar-fill.school-b { background: linear-gradient(90deg, #d8623a, #ff8a5a, #ffb58f); animation: barPulseOrange 2.4s ease-in-out infinite; }
     @keyframes barPulseOrange {
@@ -490,15 +592,9 @@
       background: radial-gradient(circle at 50% 0%, rgba(100,160,255,0.06), transparent 70%);
       pointer-events: none;
     }
-    .gap-number-row {
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .gap-number-key {
-      font-size: 0.72rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.4px;
-    }
-    .gap-number-val {
-      font-size: 1rem; font-weight: 800; color: #e0ecff;
-    }
+    .gap-number-row { display: flex; justify-content: space-between; align-items: center; }
+    .gap-number-key { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.4px; }
+    .gap-number-val { font-size: 1rem; font-weight: 800; color: #e0ecff; }
     .gap-number-val.gap-val {
       font-size: 1.25rem; color: #ffcc4d;
       text-shadow: 0 0 16px rgba(255,204,77,0.4);
@@ -512,23 +608,33 @@
       letter-spacing: 0.4px;
     }
 
-    /* Action buttons in gap sheet */
+    /* Action buttons in gap sheet — animated text buttons */
     .gap-actions {
       display: flex; gap: 10px; margin-top: 18px;
     }
     .gap-action-btn {
-      flex: 1; padding: 11px 14px; border-radius: 12px;
+      flex: 1; padding: 12px 16px; border-radius: 12px;
       border: 1px solid rgba(140,170,255,0.3);
       background: rgba(30,50,90,0.7);
-      color: #d8e8ff; font-size: 0.82rem; font-weight: 700;
-      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      color: #d8e8ff; font-size: 0.84rem; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
       font-family: "Inter", sans-serif;
+      letter-spacing: 0.3px; white-space: nowrap;
+      position: relative; overflow: hidden;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
     }
-    .gap-action-btn:hover { background: rgba(50,80,140,0.8); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(80,130,255,0.25); }
+    .gap-action-btn::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.14) 50%, transparent 80%);
+      transform: translateX(-130%);
+      animation: fabShimmer 3.2s linear infinite;
+    }
+    .gap-action-btn:hover { background: rgba(50,80,140,0.85); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(80,130,255,0.25); }
     .gap-action-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
-    .gap-action-btn.share-btn { border-color: rgba(100,220,160,0.35); }
-    .gap-action-btn.download-btn { border-color: rgba(100,160,255,0.35); }
+    .gap-action-btn.share-btn { border-color: rgba(100,220,160,0.4); background: rgba(20,70,50,0.6); }
+    .gap-action-btn.share-btn:hover { background: rgba(30,90,65,0.8); box-shadow: 0 6px 18px rgba(60,200,120,0.25); }
+    .gap-action-btn.download-btn { border-color: rgba(100,160,255,0.4); }
+    .gap-action-btn .btn-icon { font-size: 1rem; }
 
     .gap-placeholder {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -537,58 +643,108 @@
     }
     .gap-placeholder-icon { font-size: 2.4rem; opacity: 0.5; }
 
+    /* ─── KEYFRAMES ─── */
     @keyframes shimmer { to { transform: translateX(130%); } }
     @keyframes barPulse {
       0%, 100% { box-shadow: 0 0 10px rgba(90,144,255,0.4), 0 0 24px rgba(90,144,255,0.2); }
       50%       { box-shadow: 0 0 20px rgba(90,144,255,0.75), 0 0 44px rgba(90,144,255,0.35); }
     }
 
-    @media (min-width: 641px) {
-      body { padding: 24px 20px 90px; }
-      .podium-item { padding: 14px 14px 12px; }
-      .logo-cell { width: 46px; height: 46px; }
-      .school-logo { width: 46px; height: 46px; border-radius: 10px; }
-      .school-logo-fallback { border-radius: 10px; }
-      .school-title { font-size: 0.95rem; }
-      .podium-item .school-title { font-size: 1rem; }
-      .media-unit { font-size: 0.75rem; }
-      .podium-votes { font-size: 1.55rem; }
-      .podium-rank { font-size: 0.8rem; }
-      .school-identity { gap: 12px; }
+    /* ─── DESKTOP (>=900px): true 16:9 side-by-side layout ─── */
+    @media (min-width: 900px) {
+      body { padding: 0; }
+      .page-wrap {
+        padding: 20px 24px 24px;
+        min-height: 100vh;
+        align-items: center;
+      }
+
+      .dashboard-header-row {
+        grid-template-columns: 1fr 320px;
+      }
+
+      .dashboard-main-row {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+
+      .leaderboard-card { height: 100%; }
+
+      .podium-card { padding-bottom: 18px; }
+      .podium-grid {
+        min-height: 224px;
+        padding-bottom: 20px;
+      }
+      .podium-item.podium-gold   { min-height: 224px; }
+      .podium-item.podium-silver { min-height: 186px; }
+      .podium-item.podium-bronze { min-height: 160px; }
+
+      .desktop-gap-card { display: block; }
+
+      .share-fab-wrap .gap-fab,
+      .gap-overlay { display: none; }
+
+      .board-item { padding: 9px 14px; }
+      .board-list { gap: 9px; }
+
+      /* Larger countdown on desktop */
+      .time-box { min-width: 58px; padding: 10px 12px; }
+      .time-box strong { font-size: 1.2rem; }
     }
 
+    /* ─── MOBILE (<=640px): 9:16 portrait, stacked layout ─── */
     @media (max-width: 640px) {
-      body { padding: 8px 8px 70px; }
+      body { padding: 0; }
 
-      .header { flex-direction: row; align-items: flex-start; padding: 10px 12px 10px; gap: 8px; flex-wrap: nowrap; }
+      .page-wrap {
+        padding: 8px 8px 80px;
+        align-items: flex-start;
+      }
+
+      .dashboard { gap: 8px; }
+
+      /* Force single-column stacking on mobile */
+      .dashboard-header-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .dashboard-main-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .dashboard-left-column { gap: 8px; }
+
+      .header { padding: 10px 12px; gap: 6px; }
       .title-block h1 { font-size: 1rem; }
       .title-block p { font-size: 0.72rem; }
-
-      .header-right { align-items: flex-end; gap: 4px; }
-      .top-school-chip .chip-name { max-width: 120px; font-size: 0.72rem; }
+      .header-right { flex-direction: row; align-items: center; justify-content: space-between; }
+      .top-school-chip { align-items: flex-end; }
+      .top-school-chip .chip-name { max-width: 130px; font-size: 0.75rem; }
       .top-school-chip .chip-label { font-size: 0.6rem; }
-      .top-school-chip .chip-stats { font-size: 0.62rem; }
-      .live-badge { font-size: 0.62rem; padding: 3px 7px; }
+      .top-school-chip .chip-stats { font-size: 0.64rem; }
+      .live-badge { font-size: 0.62rem; padding: 3px 8px; }
 
-      .countdown-row { padding: 8px 12px 8px; }
+      .countdown-card { padding: 8px 12px; }
       .countdown .label { font-size: 0.68rem; margin-bottom: 4px; }
-      .time-box { min-width: 40px; padding: 5px 6px; }
-      .time-box strong { font-size: 0.9rem; }
+      .time-box { min-width: 42px; padding: 6px 7px; }
+      .time-box strong { font-size: 0.95rem; }
       .time-box span { font-size: 0.6rem; }
-      #countdown { justify-content: center; gap: 5px; }
+      #countdown { gap: 5px; }
 
-      .podium-card { padding: 10px 8px 10px; }
+      .podium-card { padding: 10px 9px 12px; }
       .podium-grid {
         grid-template-columns: 0.82fr 1fr 0.72fr;
         gap: 6px;
-        align-items: flex-end;
-        min-height: 200px;
-        padding-bottom: 30px; /* Increased to move bars significantly above the line on phones */
+        min-height: 190px;
+        padding-bottom: 24px;
+        flex: 1;
       }
-      .podium-item.podium-gold   { min-height: 200px; }
-      .podium-item.podium-silver { min-height: 162px; }
-      .podium-item.podium-bronze { min-height: 140px; }
-      .podium-item { padding: 8px 6px 7px; border-radius: 11px; }
+      .podium-item.podium-gold   { min-height: 190px; }
+      .podium-item.podium-silver { min-height: 152px; }
+      .podium-item.podium-bronze { min-height: 130px; }
+      .podium-item { padding: 8px 7px 7px; border-radius: 11px; }
       .podium-item:hover { transform: none !important; }
 
       .school-identity { gap: 5px; margin-bottom: 5px; }
@@ -596,28 +752,44 @@
       .school-logo { width: 28px; height: 28px; border-radius: 6px; }
       .school-logo-fallback { border-radius: 6px; font-size: 0.6rem; }
       .school-title { font-size: 0.65rem !important; }
-      .media-unit { font-size: 0.58rem !important; display: none; } 
-      .podium-rank { font-size: 0.62rem; margin-bottom: 5px; }
-      .podium-votes { font-size: 1rem; }
+      .media-unit { display: none !important; }
+      .podium-rank { font-size: 0.6rem; margin-bottom: 4px; }
+      .podium-votes { font-size: 1.05rem; }
       .first-badge { font-size: 0.58rem; gap: 3px; margin-top: 3px; }
-      .podium-height { min-height: 36px; }
+      .podium-height { min-height: 34px; }
 
-      .leaderboard-card { padding: 10px 8px 10px; }
+      .leaderboard-card { padding: 10px 9px 12px; }
       .board-meta { flex-wrap: wrap; gap: 5px; }
       .board-votes { font-size: 0.8rem; }
       .board-item { padding: 8px 10px; border-radius: 10px; }
       .board-list { gap: 7px; }
+      .section-title { font-size: 0.9rem; margin-bottom: 10px; }
 
-      .footer { font-size: 0.74rem; padding: 10px 8px 2px; }
-      .dashboard { gap: 8px; }
+      .footer { font-size: 0.72rem; padding: 8px 8px 2px; }
+
+      /* Mobile FAB: slightly smaller */
+      .fab-btn { height: 40px; padding: 0 14px; font-size: 0.76rem; }
+      .gap-fab { height: 42px; padding: 0 14px; font-size: 0.78rem; }
+      .share-fab-wrap { right: 10px; bottom: 10px; gap: 7px; }
+
+      /* Gap sheet: taller on mobile */
+      .gap-sheet { max-height: 94vh; padding: 16px 14px 24px; }
+      .gap-selectors { gap: 7px; }
+      .gap-select { padding: 9px 10px; font-size: 0.78rem; }
+
+      .gap-action-btn { font-size: 0.78rem; padding: 10px 10px; }
+
+      .desktop-gap-card { display: none; }
     }
 
     @media (max-width: 360px) {
       .school-title { font-size: 0.58rem !important; }
-      .podium-votes { font-size: 0.88rem; }
+      .podium-votes { font-size: 0.9rem; }
       .podium-item { padding: 7px 5px 6px; }
       .logo-cell { width: 24px; height: 24px; }
       .school-logo { width: 24px; height: 24px; }
+      .fab-btn { padding: 0 10px; font-size: 0.72rem; }
+      .gap-fab { padding: 0 10px; font-size: 0.74rem; }
     }
   </style>
 </head>
@@ -627,57 +799,105 @@
   <div class="bg-orb orb-3"></div>
   <div class="bg-orb orb-4"></div>
 
-  <main class="dashboard" id="dashboard">
+  <div class="page-wrap">
+    <main class="dashboard" id="dashboard">
 
-    <section class="glass header">
-      <div class="title-block">
-        <h1>NETHINETHERA Vote Tracker</h1>
-        <p>Live Rank Votes</p>
-      </div>
-      <div class="header-right">
-        <span class="live-badge"><span class="live-dot"></span>Live</span>
-        <div class="top-school-chip" id="topSchoolChip">
-          <span class="chip-label">🏆 Leading</span>
-          <span class="chip-name" id="chipName">Loading…</span>
-          <div class="chip-stats">
-            <span class="chip-stat-item"><strong id="chipVotes">—</strong> total votes</span>
-            <span class="chip-stat-item"><strong id="chipSchools">—</strong> schools</span>
+      <!-- Row 1: Header + Countdown side by side on desktop, stacked on mobile -->
+      <div class="dashboard-header-row">
+        <section class="glass header">
+          <div class="title-block">
+            <h1>NETHINETHERA Vote Tracker</h1>
+            <p>Live Rank Votes</p>
           </div>
+          <div class="header-right">
+            <span class="live-badge"><span class="live-dot"></span>Live</span>
+            <div class="top-school-chip" id="topSchoolChip">
+              <span class="chip-label">🏆 Leading</span>
+              <span class="chip-name" id="chipName">Loading…</span>
+              <div class="chip-stats">
+                <span class="chip-stat-item"><strong id="chipVotes">—</strong> votes</span>
+                <span class="chip-stat-item"><strong id="chipSchools">—</strong> schools</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="glass countdown-card">
+          <div class="countdown">
+            <div class="label">Countdown to April 21, 2026</div>
+            <div id="countdown"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Row 2: Podium + Leaderboard side by side on desktop, stacked on mobile -->
+      <div class="dashboard-main-row">
+        <div class="dashboard-left-column">
+        <section class="glass podium-card">
+          <h2 class="section-title">Top 3 Podium 🏆</h2>
+          <div id="podium" class="podium-grid"></div>
+        </section>
+
+          <section class="glass desktop-gap-card" aria-label="Gap Analyzer">
+            <h2 class="section-title">Gap Analyzer</h2>
+            <div class="gap-subtitle">Compare any two schools side by side</div>
+
+            <div class="gap-selectors">
+              <select class="gap-select" id="desktopGapSelectA" aria-label="Desktop School A">
+                <option value="">-- School A --</option>
+              </select>
+              <div class="gap-vs">VS</div>
+              <select class="gap-select" id="desktopGapSelectB" aria-label="Desktop School B">
+                <option value="">-- School B --</option>
+              </select>
+            </div>
+
+            <div class="gap-result-wrap">
+              <div id="desktopGapResult">
+                <div class="gap-placeholder">
+                  <div class="gap-placeholder-icon">🏫</div>
+                  <div>Select two schools above to see the gap</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gap-actions" id="desktopGapActions" style="display:none">
+              <button class="gap-action-btn share-btn" id="desktopGapShareBtn" type="button">
+                <span class="btn-icon">Share</span>
+              </button>
+              <button class="gap-action-btn download-btn" id="desktopGapDownloadBtn" type="button">
+                <span class="btn-icon">Save</span>
+              </button>
+            </div>
+          </section>
         </div>
+
+        <section class="glass leaderboard-card">
+          <h2 class="section-title">Leaderboard</h2>
+          <div id="board" class="board-list"></div>
+          <p id="status" class="status"></p>
+          <p id="exportUpdated" class="export-updated"></p>
+        </section>
       </div>
-    </section>
 
-    <section class="glass countdown-row" style="padding:12px 18px 14px;">
-      <div class="countdown">
-        <div class="label">Countdown to April 21, 2026</div>
-        <div id="countdown"></div>
-      </div>
-    </section>
+      <footer class="footer">
+        &copy; Educational Media Unit of Maris Stella College Negombo.
+      </footer>
 
-    <section class="glass podium-card">
-      <h2 class="section-title">Top 3 Podium 🏆</h2>
-      <div id="podium" class="podium-grid"></div>
-    </section>
+    </main>
+  </div>
 
-    <section class="glass leaderboard-card">
-      <h2 class="section-title">Leaderboard</h2>
-      <div id="board" class="board-list"></div>
-      <p id="status" class="status"></p>
-      <p id="exportUpdated" class="export-updated"></p>
-    </section>
-
-    <footer class="footer">
-      &copy; Educational Media Unit of Maris Stella College Negombo.
-    </footer>
-
-  </main>
-
+  <!-- FAB buttons with animated text -->
   <div class="share-fab-wrap">
     <button id="gapBtn" class="gap-fab" type="button" title="Compare Schools" aria-label="Compare Schools">
       <span class="gap-fab-icon">⚡</span> Gap Analyzer
     </button>
-    <button id="shareBtn"    class="fab-btn" type="button" title="Share PNG"    aria-label="Share PNG">🚀</button>
-    <button id="downloadBtn" class="fab-btn" type="button" title="Download PNG" aria-label="Download PNG">📥</button>
+    <button id="shareBtn" class="fab-btn" type="button" title="Share PNG" aria-label="Share PNG">
+      <span class="fab-icon">🚀</span> Share
+    </button>
+    <button id="downloadBtn" class="fab-btn" type="button" title="Download" aria-label="Download PNG">
+      <span class="fab-icon">📥</span> Download
+    </button>
   </div>
 
   <!-- Gap Analyzer Modal -->
@@ -707,8 +927,12 @@
       </div>
 
       <div class="gap-actions" id="gapActions" style="display:none">
-        <button class="gap-action-btn share-btn" id="gapShareBtn" type="button">🚀 Share</button>
-        <button class="gap-action-btn download-btn" id="gapDownloadBtn" type="button">📥 Download</button>
+        <button class="gap-action-btn share-btn" id="gapShareBtn" type="button">
+          <span class="btn-icon">🚀</span> Share
+        </button>
+        <button class="gap-action-btn download-btn" id="gapDownloadBtn" type="button">
+          <span class="btn-icon">📥</span> Download
+        </button>
       </div>
     </div>
   </div>
@@ -904,6 +1128,8 @@
     animateInitialEntry();
     hasInitialRender = true;
     currentVotesData = sortedVotes;
+    syncGapSelects();
+    refreshGapViews();
 
     const now = new Date();
     statusEl.textContent = `Live · Updated ${now.toLocaleTimeString()}`;
@@ -960,6 +1186,8 @@
     updateChip(sortedVotes);
     statusEl.textContent = `Auto-updated ${new Date().toLocaleTimeString()}`;
     currentVotesData = sortedVotes;
+    syncGapSelects();
+    refreshGapViews();
   }
 
   async function loadVotes() {
@@ -970,7 +1198,7 @@
       const data       = await res.json();
       const normalized = normalizeVotes(data);
       const sig        = JSON.stringify(normalized);
-      if (!hasInitialRender)            { renderDashboard(normalized);          lastDataSignature = sig; }
+      if (!hasInitialRender)             { renderDashboard(normalized);          lastDataSignature = sig; }
       else if (sig !== lastDataSignature) { updateOnlyChangedValues(normalized); lastDataSignature = sig; }
     } catch (e) {
       if (!hasInitialRender) {
@@ -982,10 +1210,8 @@
   }
 
   async function captureElement(el, opts = {}) {
-    // Wait for any images inside el to finish loading
     const imgs = Array.from(el.querySelectorAll("img"));
     await Promise.allSettled(imgs.map(img => img.complete ? Promise.resolve() : new Promise(r => { img.onload = r; img.onerror = r; })));
-
     const scale = opts.scale || 3;
     const canvas = await html2canvas(el, {
       scale,
@@ -995,10 +1221,8 @@
       logging: false,
       imageTimeout: 8000,
       onclone: (doc, clone) => {
-        // Ensure cloned el is fully visible
         clone.style.opacity = "1";
         clone.style.transform = "none";
-        // For gap card, ensure proper sizing
         if (opts.fixWidth) {
           clone.style.width = opts.fixWidth + "px";
           clone.style.maxWidth = opts.fixWidth + "px";
@@ -1012,16 +1236,37 @@
     const dashboard = document.querySelector(".dashboard");
     const isMobile  = window.innerWidth <= 640;
     const scale = isMobile ? 2 : 3;
-    const canvas = await html2canvas(dashboard, {
-      scale,
-      useCORS: true,
-      allowTaint: false,
-      backgroundColor: "#050917",
-      logging: false,
-      imageTimeout: 8000,
-      scrollX: 0, scrollY: -window.scrollY,
-    });
-    return canvas.toDataURL("image/png");
+    const hiddenGapActions = Array.from(document.querySelectorAll(".gap-actions")).filter(el => getComputedStyle(el).display !== "none");
+    const desktopGapCard = document.querySelector(".desktop-gap-card");
+    const hideDesktopGapCard = desktopGapCard && !hasActiveGapComparison(gapContexts.find(ctx => ctx.key === "desktop"));
+    hiddenGapActions.forEach(el => { el.dataset.prevDisplay = el.style.display; el.style.display = "none"; });
+    if (hideDesktopGapCard) {
+      desktopGapCard.dataset.prevDisplay = desktopGapCard.style.display;
+      desktopGapCard.style.display = "none";
+    }
+    document.body.classList.add("export-mode");
+    try {
+      const canvas = await html2canvas(dashboard, {
+        scale,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: "#050917",
+        logging: false,
+        imageTimeout: 8000,
+        scrollX: 0, scrollY: -window.scrollY,
+      });
+      return canvas.toDataURL("image/png");
+    } finally {
+      document.body.classList.remove("export-mode");
+      hiddenGapActions.forEach(el => {
+        el.style.display = el.dataset.prevDisplay || "flex";
+        delete el.dataset.prevDisplay;
+      });
+      if (hideDesktopGapCard) {
+        desktopGapCard.style.display = desktopGapCard.dataset.prevDisplay || "";
+        delete desktopGapCard.dataset.prevDisplay;
+      }
+    }
   }
 
   async function doShare(dataUrl, filename, title) {
@@ -1032,7 +1277,6 @@
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
         await navigator.share({ files: [file], title });
       } else {
-        // Fallback: download
         const a = document.createElement("a");
         a.href = dataUrl; a.download = filename; a.click();
       }
@@ -1046,37 +1290,115 @@
 
   shareBtn.onclick = async () => {
     shareBtn.disabled = true;
-    shareBtn.textContent = "⏳";
+    shareBtn.innerHTML = `<span class="fab-icon">⏳</span> Sharing…`;
     const img = await capture();
     await doShare(img, "votes.png", "Nethinethera Vote Tracker");
-    shareBtn.textContent = "🚀";
+    shareBtn.innerHTML = shareBtn.innerHTML.replace(" PNG", "");
+    shareBtn.innerHTML = `<span class="fab-icon">🚀</span> Share PNG`;
+    shareBtn.innerHTML = shareBtn.innerHTML.replace(" PNG", "");
     shareBtn.disabled = false;
   };
 
   downloadBtn.onclick = async () => {
     downloadBtn.disabled = true;
-    downloadBtn.textContent = "⏳";
+    downloadBtn.innerHTML = `<span class="fab-icon">⏳</span> Saving…`;
     const img = await capture();
     await doDownload(img, "votes.png");
-    downloadBtn.textContent = "📥";
+    downloadBtn.innerHTML = downloadBtn.innerHTML.replace(" PNG", "");
+    downloadBtn.innerHTML = `<span class="fab-icon">📥</span> Download`;
+    downloadBtn.innerHTML = downloadBtn.innerHTML.replace(" PNG", "");
     downloadBtn.disabled = false;
   };
 
-  // ─── Gap Analyzer ───────────────────────────────────────────────────────────
+  // ─── Gap Analyzer ────────────────────────────────────────────────────────────
 
   let currentVotesData = [];
 
-  const gapBtn      = document.getElementById("gapBtn");
-  const gapOverlay  = document.getElementById("gapOverlay");
-  const gapSelectA  = document.getElementById("gapSelectA");
-  const gapSelectB  = document.getElementById("gapSelectB");
-  const gapResult   = document.getElementById("gapResult");
-  const gapActions  = document.getElementById("gapActions");
-  const gapShareBtn = document.getElementById("gapShareBtn");
+  const gapBtn         = document.getElementById("gapBtn");
+  const gapOverlay     = document.getElementById("gapOverlay");
+  const gapSelectA     = document.getElementById("gapSelectA");
+  const gapSelectB     = document.getElementById("gapSelectB");
+  const gapResult      = document.getElementById("gapResult");
+  const gapActions     = document.getElementById("gapActions");
+  const gapShareBtn    = document.getElementById("gapShareBtn");
   const gapDownloadBtn = document.getElementById("gapDownloadBtn");
+  const desktopGapSelectA     = document.getElementById("desktopGapSelectA");
+  const desktopGapSelectB     = document.getElementById("desktopGapSelectB");
+  const desktopGapResult      = document.getElementById("desktopGapResult");
+  const desktopGapActions     = document.getElementById("desktopGapActions");
+  const desktopGapShareBtn    = document.getElementById("desktopGapShareBtn");
+  const desktopGapDownloadBtn = document.getElementById("desktopGapDownloadBtn");
+
+  const gapContexts = [
+    {
+      key: "mobile",
+      selectA: gapSelectA,
+      selectB: gapSelectB,
+      result: gapResult,
+      actions: gapActions,
+      shareBtn: gapShareBtn,
+      downloadBtn: gapDownloadBtn
+    },
+    {
+      key: "desktop",
+      selectA: desktopGapSelectA,
+      selectB: desktopGapSelectB,
+      result: desktopGapResult,
+      actions: desktopGapActions,
+      shareBtn: desktopGapShareBtn,
+      downloadBtn: desktopGapDownloadBtn
+    }
+  ].filter(ctx => ctx.selectA && ctx.selectB && ctx.result && ctx.actions && ctx.shareBtn && ctx.downloadBtn);
+
+  function populateGapSelects(selectA, selectB) {
+    if (!selectA || !selectB) return;
+    const valueA = selectA.value;
+    const valueB = selectB.value;
+
+    selectA.innerHTML = '<option value="">-- Select --</option>' +
+      currentVotesData
+        .filter(v => String(v.registered_candidate) !== valueB)
+        .map(v => {
+          const m = getSchoolMeta(v.registered_candidate);
+          return `<option value="${v.registered_candidate}">${m.school.split(",")[0]}</option>`;
+        }).join("");
+
+    selectB.innerHTML = '<option value="">-- Select --</option>' +
+      currentVotesData
+        .filter(v => String(v.registered_candidate) !== valueA)
+        .map(v => {
+          const m = getSchoolMeta(v.registered_candidate);
+          return `<option value="${v.registered_candidate}">${m.school.split(",")[0]}</option>`;
+        }).join("");
+
+    if (valueA && currentVotesData.some(v => String(v.registered_candidate) === valueA && String(v.registered_candidate) !== valueB)) {
+      selectA.value = valueA;
+    }
+    if (valueB && currentVotesData.some(v => String(v.registered_candidate) === valueB && String(v.registered_candidate) !== valueA)) {
+      selectB.value = valueB;
+    }
+  }
+
+  function syncGapSelects() {
+    gapContexts.forEach(ctx => populateGapSelects(ctx.selectA, ctx.selectB));
+  }
+
+  function refreshGapViews() {
+    gapContexts.forEach(ctx => {
+      if (ctx.selectA.value && ctx.selectB.value) {
+        renderGap(ctx);
+      }
+    });
+  }
+
+  function hasActiveGapComparison(context) {
+    if (!context) return false;
+    const idA = Number(context.selectA.value);
+    const idB = Number(context.selectB.value);
+    return !!idA && !!idB && idA !== idB;
+  }
 
   function openGap() {
-    // Populate selects
     [gapSelectA, gapSelectB].forEach(sel => {
       const prev = sel.value;
       sel.innerHTML = '<option value="">— Select —</option>' +
@@ -1099,7 +1421,7 @@
   gapOverlay.addEventListener("click", e => { if (e.target === gapOverlay) closeGap(); });
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeGap(); });
 
-  function buildGapCard(vA, vB) {
+  function buildGapCard(vA, vB, contextKey) {
     const metaA = getSchoolMeta(vA.registered_candidate);
     const metaB = getSchoolMeta(vB.registered_candidate);
     const maxV  = Math.max(vA.vote_count, vB.vote_count, 1);
@@ -1121,13 +1443,12 @@
     const now = new Date();
     const ts  = now.toLocaleDateString("en-GB", { day:"numeric", month:"short" }) + " · " + now.toLocaleTimeString([], { hour:"2-digit", minute:"2-digit" });
 
-    return `<div class="gap-card" id="gapCardInner">
+    return `<div class="gap-card" id="gapCardInner-${contextKey}">
       <div class="gap-card-header">
         <div class="gap-card-label">⚡ Gap Analysis</div>
         <div class="gap-card-event">EMUMSC NETHINETHERA · ${escapeHtml(ts)}</div>
       </div>
 
-      <!-- School A -->
       <div class="gap-school-row">
         <div class="gap-school-logo-wrap">${logoHtml(metaA, "logo-a")}</div>
         <div class="gap-school-info">
@@ -1137,7 +1458,6 @@
         <div class="gap-school-votes" style="color:#8fc2ff">${vA.vote_count.toLocaleString()}</div>
       </div>
 
-      <!-- School B -->
       <div class="gap-school-row">
         <div class="gap-school-logo-wrap">${logoHtml(metaB, "logo-b")}</div>
         <div class="gap-school-info">
@@ -1147,7 +1467,6 @@
         <div class="gap-school-votes" style="color:#ffb58f">${vB.vote_count.toLocaleString()}</div>
       </div>
 
-      <!-- Bars -->
       <div class="gap-bar-section">
         <div class="gap-bar-row">
           <div class="gap-bar-label" style="color:#8fc2ff">A</div>
@@ -1159,7 +1478,6 @@
         </div>
       </div>
 
-      <!-- Numbers -->
       <div class="gap-number-section">
         <div class="gap-number-row">
           <div class="gap-number-key">Vote Gap</div>
@@ -1185,17 +1503,17 @@
     </div>`;
   }
 
-  function animateGapCard(gap) {
-    // Animate bars
+  function animateGapCard(context, gap) {
+    // SLOWED: bars delayed by 120ms, counter duration 1600ms
     requestAnimationFrame(() => {
-      gapResult.querySelectorAll(".gap-bar-fill").forEach(b => {
+      context.result.querySelectorAll(".gap-bar-fill").forEach(b => {
         b.style.width = "0%";
-        setTimeout(() => { b.style.width = b.dataset.pct + "%"; }, 60);
+        setTimeout(() => { b.style.width = b.dataset.pct + "%"; }, 120);
       });
-      // Animate counter
-      const el = document.getElementById("gapValDisplay");
+      // Animate counter — SLOWED to 1600ms
+      const el = document.querySelector(`#gapCardInner-${context.key} #gapValDisplay`);
       if (!el) return;
-      let start = 0; const end = gap; const dur = 900;
+      let start = 0; const end = gap; const dur = 1600;
       const step = ts => {
         if (!step.s) step.s = ts;
         const progress = Math.min((ts - step.s) / dur, 1);
@@ -1207,12 +1525,14 @@
     });
   }
 
-  function renderGap() {
-    const idA = Number(gapSelectA.value);
-    const idB = Number(gapSelectB.value);
+  function renderGap(context) {
+    const idA = Number(context.selectA.value);
+    const idB = Number(context.selectB.value);
+    const gapResult = context.result;
+    const gapCardSelector = `#gapCardInner-${context.key}`;
     if (!idA || !idB || idA === idB) {
       gapResult.innerHTML = `<div class="gap-placeholder"><div class="gap-placeholder-icon">🏫</div><div>${idA === idB && idA ? "Please select two different schools" : "Select two schools above"}</div></div>`;
-      gapActions.style.display = "none";
+      context.actions.style.display = "none";
       return;
     }
     const vA = currentVotesData.find(v => v.registered_candidate === idA);
@@ -1220,50 +1540,91 @@
     if (!vA || !vB) return;
 
     const gap = Math.abs(vA.vote_count - vB.vote_count);
-    gapResult.innerHTML = buildGapCard(vA, vB);
-    gapActions.style.display = "flex";
-    animateGapCard(gap);
+    context.result.innerHTML = buildGapCard(vA, vB, context.key);
+    context.actions.style.display = "flex";
+    animateGapCard(context, gap);
 
-    // Entry animation
-    gsap.from("#gapCardInner", { y: 20, opacity: 0, duration: 0.4, ease: "back.out(1.6)" });
-    gsap.from("#gapCardInner .gap-school-row", { x: -14, opacity: 0, duration: 0.35, stagger: 0.1, ease: "power2.out", delay: 0.15 });
-    gsap.from("#gapCardInner .gap-number-section", { y: 10, opacity: 0, duration: 0.35, ease: "power2.out", delay: 0.3 });
+    // Entry animation — SLOWED durations
+    gsap.from(gapCardSelector, { y: 28, opacity: 0, duration: 0.75, ease: "back.out(1.6)" });
+    gsap.from(`${gapCardSelector} .gap-school-row`, { x: -18, opacity: 0, duration: 0.65, stagger: 0.18, ease: "power2.out", delay: 0.25 });
+    gsap.from(`${gapCardSelector} .gap-number-section`, { y: 14, opacity: 0, duration: 0.6, ease: "power2.out", delay: 0.55 });
   }
 
-  gapSelectA.addEventListener("change", renderGap);
-  gapSelectB.addEventListener("change", renderGap);
+  gapSelectA.addEventListener("change", () => {
+    populateGapSelects(gapSelectA, gapSelectB);
+    renderGap(gapContexts[0]);
+  });
+  gapSelectB.addEventListener("change", () => {
+    populateGapSelects(gapSelectA, gapSelectB);
+    renderGap(gapContexts[0]);
+  });
+  if (desktopGapSelectA && desktopGapSelectB) {
+    desktopGapSelectA.addEventListener("change", () => {
+      populateGapSelects(desktopGapSelectA, desktopGapSelectB);
+      renderGap(gapContexts[1]);
+    });
+    desktopGapSelectB.addEventListener("change", () => {
+      populateGapSelects(desktopGapSelectA, desktopGapSelectB);
+      renderGap(gapContexts[1]);
+    });
+  }
 
-  async function captureGapCard() {
-    const card = document.getElementById("gapCardInner");
+  async function captureGapCard(contextKey = "mobile") {
+    const card = document.getElementById(`gapCardInner-${contextKey}`);
     if (!card) return null;
-    // Temporarily set bars to their final width for static capture
     card.querySelectorAll(".gap-bar-fill").forEach(b => { b.style.transition = "none"; b.style.width = b.dataset.pct + "%"; });
-    // Wait a frame
+    document.body.classList.add("export-mode");
     await new Promise(r => requestAnimationFrame(r));
     await new Promise(r => setTimeout(r, 80));
-    const dataUrl = await captureElement(card, { scale: 3, bg: "#0d1630", fixWidth: card.offsetWidth });
-    // Restore
-    card.querySelectorAll(".gap-bar-fill").forEach(b => { b.style.transition = ""; });
-    return dataUrl;
+    try {
+      return await captureElement(card, { scale: 3, bg: "#0d1630", fixWidth: card.offsetWidth });
+    } finally {
+      document.body.classList.remove("export-mode");
+      card.querySelectorAll(".gap-bar-fill").forEach(b => { b.style.transition = ""; });
+    }
   }
 
   gapShareBtn.addEventListener("click", async () => {
     gapShareBtn.disabled = true;
-    gapShareBtn.textContent = "⏳ Sharing…";
+    gapShareBtn.innerHTML = `<span class="btn-icon">⏳</span> Sharing…`;
     const img = await captureGapCard();
     if (img) await doShare(img, "gap-analysis.png", "NETHINETHERA Vote Gap Analysis");
-    gapShareBtn.textContent = "🚀 Share";
+    gapShareBtn.innerHTML = `<span class="btn-icon">🚀</span> Share PNG`;
+    gapShareBtn.innerHTML = gapShareBtn.innerHTML.replace(" PNG", "");
     gapShareBtn.disabled = false;
   });
 
   gapDownloadBtn.addEventListener("click", async () => {
     gapDownloadBtn.disabled = true;
-    gapDownloadBtn.textContent = "⏳ Saving…";
+    gapDownloadBtn.innerHTML = `<span class="btn-icon">⏳</span> Saving…`;
     const img = await captureGapCard();
     if (img) await doDownload(img, "gap-analysis.png");
-    gapDownloadBtn.textContent = "📥 Download";
+    gapDownloadBtn.innerHTML = `<span class="btn-icon">📥</span> Download`;
+    gapDownloadBtn.innerHTML = gapDownloadBtn.innerHTML.replace(" PNG", "");
     gapDownloadBtn.disabled = false;
   });
+
+  if (desktopGapShareBtn && desktopGapDownloadBtn) {
+    desktopGapShareBtn.addEventListener("click", async () => {
+      desktopGapShareBtn.disabled = true;
+      desktopGapShareBtn.innerHTML = `<span class="btn-icon">...</span> Sharing...`;
+      const img = await captureGapCard("desktop");
+      if (img) await doShare(img, "gap-analysis.png", "NETHINETHERA Vote Gap Analysis");
+      desktopGapShareBtn.innerHTML = `<span class="btn-icon">Share</span> PNG`;
+      desktopGapShareBtn.innerHTML = desktopGapShareBtn.innerHTML.replace(" PNG", "");
+      desktopGapShareBtn.disabled = false;
+    });
+
+    desktopGapDownloadBtn.addEventListener("click", async () => {
+      desktopGapDownloadBtn.disabled = true;
+      desktopGapDownloadBtn.innerHTML = `<span class="btn-icon">...</span> Saving...`;
+      const img = await captureGapCard("desktop");
+      if (img) await doDownload(img, "gap-analysis.png");
+      desktopGapDownloadBtn.innerHTML = `<span class="btn-icon">Save</span> PNG`;
+      desktopGapDownloadBtn.innerHTML = desktopGapDownloadBtn.innerHTML.replace(" PNG", "");
+      desktopGapDownloadBtn.disabled = false;
+    });
+  }
 
   initOrbs();
   renderCountdown();
