@@ -206,19 +206,36 @@ input[type="range"].vol-slider::-webkit-slider-thumb{-webkit-appearance:none;wid
 #finaleTitle.lose{font-size:clamp(1.8rem,5vw,3.5rem);background:linear-gradient(135deg,#a0b8e8 0%,#d0e4ff 50%,#8fb0e0 100%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 20px rgba(160,190,240,.5))}
 /* ── ENTRY OVERLAY ── */
 #entryOverlay{position:fixed;inset:0;z-index:2000;background:radial-gradient(ellipse at 50% 40%,#0b1640,#020916);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:28px;will-change:opacity}
-#entryBtn{background:linear-gradient(135deg,rgba(80,130,255,.55),rgba(120,200,255,.38));border:1px solid rgba(160,200,255,.5);color:#e8f0ff;font-family:"Inter",sans-serif;font-size:clamp(.85rem,2.5vw,1.3rem);font-weight:800;letter-spacing:1.5px;padding:22px 50px;border-radius:999px;cursor:pointer;position:relative;overflow:hidden;animation:entP 2s ease-in-out infinite;box-shadow:0 0 40px rgba(80,140,255,.4),0 0 80px rgba(80,140,255,.2);text-align:center;max-width:88vw;line-height:1.4}
+#entryBtn{background:linear-gradient(135deg,rgba(80,130,255,.55),rgba(120,200,255,.38));border:1px solid rgba(160,200,255,.5);color:#e8f0ff;font-family:"Inter",sans-serif;font-size:clamp(.85rem,2.5vw,1.3rem);font-weight:800;letter-spacing:1.5px;padding:22px 50px;border-radius:999px;cursor:pointer;position:relative;overflow:hidden;animation:entP 2s ease-in-out infinite;box-shadow:0 0 40px rgba(80,140,255,.4),0 0 80px rgba(80,140,255,.2);text-align:center;max-width:88vw;line-height:1.4;transition:opacity .3s,filter .3s}
+#entryBtn:disabled{opacity:.55;cursor:not-allowed;animation:none;filter:grayscale(.4)}
+#entryBtn:disabled::before{animation:none}
+/* Loading progress bar */
+#entryProgressWrap{width:min(340px,80vw);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;transition:opacity .4s}
+#entryProgressWrap.visible{opacity:1}
+#entryProgressTrack{width:100%;height:4px;border-radius:999px;background:rgba(100,140,255,.18);overflow:hidden}
+#entryProgressBar{height:100%;width:0%;border-radius:inherit;background:linear-gradient(90deg,#3a6fd8,#5a90ff,#8fc2ff);transition:width .35s ease;box-shadow:0 0 8px rgba(90,144,255,.7)}
+#entryProgressLabel{font-size:.72rem;font-weight:600;color:rgba(160,190,255,.7);letter-spacing:1.2px;font-family:"Inter",sans-serif}
 @keyframes entP{0%,100%{transform:scale(1);box-shadow:0 0 40px rgba(80,140,255,.4),0 0 80px rgba(80,140,255,.2)}50%{transform:scale(1.05);box-shadow:0 0 60px rgba(100,170,255,.7),0 0 120px rgba(80,140,255,.35)}}
 #entryBtn::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.2) 50%,transparent 80%);transform:translateX(-130%);animation:fS 2.4s linear infinite}
-#entrySubtitle{font-size:clamp(.75rem,1.8vw,.9rem);color:rgba(180,200,255,.6);letter-spacing:2px;text-transform:uppercase;font-weight:600;font-family:"Inter",sans-serif}
 /* ── RESPONSIVE ── */
 @media(min-width:900px){.page-wrap{padding:20px 24px 24px;min-height:100vh;align-items:center}.dhr{grid-template-columns:1fr 320px}.dmr{grid-template-columns:1fr 1fr;align-items:start}.leaderboard-card{height:100%}.podium-grid{min-height:224px;padding-bottom:20px}.podium-item.pg{min-height:224px}.podium-item.ps{min-height:186px}.podium-item.pb{min-height:160px}.desktop-gap-card{display:block}.share-fab-wrap .gap-fab,.gap-overlay{display:none}.time-box{min-width:58px;padding:10px 12px}.time-box strong{font-size:1.2rem}}
-@media(max-width:640px){.page-wrap{padding:8px 8px 80px}.dashboard{gap:8px}.dhr{grid-template-columns:1fr;gap:8px}.dmr{grid-template-columns:1fr;gap:8px}.dlc{gap:8px}.header{padding:9px 11px;gap:6px;flex-wrap:nowrap}.header-left{gap:6px}.title-block h1{font-size:clamp(.8rem,3.5vw,.95rem)}.title-block p{font-size:.65rem;display:none}.live-badge{font-size:.58rem;padding:3px 7px}.chip-name{max-width:100px;font-size:.7rem}.chip-label{font-size:.55rem}.chip-stats{font-size:.6rem}.countdown-card{padding:8px 12px}.time-box{min-width:40px;padding:6px 7px}.time-box strong{font-size:.9rem}.time-box span{font-size:.58rem}#countdown{gap:4px}.podium-card{padding:10px 9px 12px}.podium-grid{grid-template-columns:.82fr 1fr .72fr;gap:6px;min-height:190px}.podium-item.pg{min-height:190px}.podium-item.ps{min-height:152px}.podium-item.pb{min-height:130px}.podium-item{padding:8px 7px 7px;border-radius:11px}.podium-item:hover{transform:none!important}.logo-cell{width:28px;height:28px}.school-logo{width:28px;height:28px}.school-title{font-size:.63rem!important}.media-unit{display:none!important}.podium-rank{font-size:.58rem}.podium-votes{font-size:1rem}.podium-height{min-height:30px}.leaderboard-card{padding:10px 9px 12px}.board-item{padding:8px 10px}.board-list{gap:7px}.fab-btn{height:40px;padding:0 13px;font-size:.75rem}.gap-fab{height:42px;padding:0 13px;font-size:.77rem}.share-fab-wrap{right:10px;bottom:10px;gap:7px}.music-btn{top:10px;right:10px;width:38px;height:38px;font-size:1rem}.music-dropdown{top:56px;right:10px;min-width:185px}.desktop-gap-card{display:none}}
+/* GPU acceleration for all animated elements */
+.bar-fill,.podium-height span,#countdown,.podium-item,.board-item,#bigCountNum,.page-wrap{will-change:transform,opacity;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+@media(max-width:640px){.page-wrap{padding:8px 8px 80px}.dashboard{gap:8px}.dhr{grid-template-columns:1fr;gap:8px}.dmr{grid-template-columns:1fr;gap:8px}.dlc{gap:8px}.header{padding:9px 11px;gap:6px;flex-wrap:nowrap}.header-left{gap:6px}.title-block h1{font-size:clamp(.8rem,3.5vw,.95rem)}.title-block p{font-size:.65rem;display:none}.live-badge{font-size:.58rem;padding:3px 7px}.chip-name{max-width:100px;font-size:.7rem}.chip-label{font-size:.55rem}.chip-stats{font-size:.6rem}.countdown-card{padding:8px 12px}.time-box{min-width:40px;padding:6px 7px}.time-box strong{font-size:.9rem}.time-box span{font-size:.58rem}#countdown{gap:4px}
+/* Podium: shift entire structure up ~1.5cm on mobile */
+.podium-card{padding:10px 9px 12px;margin-bottom:-57px}.podium-grid{grid-template-columns:.82fr 1fr .72fr;gap:6px;min-height:190px;overflow:hidden}.podium-item.pg{min-height:190px}.podium-item.ps{min-height:152px}.podium-item.pb{min-height:130px}.podium-item{padding:8px 7px 7px;border-radius:11px}.podium-item:hover{transform:none!important}.logo-cell{width:28px;height:28px}.school-logo{width:28px;height:28px}.school-title{font-size:.63rem!important}.media-unit{display:none!important}.podium-rank{font-size:.58rem}.podium-votes{font-size:1rem}.podium-height{min-height:30px}.leaderboard-card{padding:10px 9px 12px}.board-item{padding:8px 10px}.board-list{gap:7px}.fab-btn{height:40px;padding:0 13px;font-size:.75rem}.gap-fab{height:42px;padding:0 13px;font-size:.77rem}.share-fab-wrap{right:10px;bottom:10px;gap:7px}
+/* Music icon: move down ~2cm on mobile to clear status bar */
+.music-btn{top:86px;right:10px;width:38px;height:38px;font-size:1rem}.music-dropdown{top:132px;right:10px;min-width:185px}.desktop-gap-card{display:none}}
 @media(max-width:360px){.school-title{font-size:.56rem!important}.podium-votes{font-size:.88rem}.logo-cell{width:24px;height:24px}.school-logo{width:24px;height:24px}}
 </style>
 </head>
 <body>
 <div id="entryOverlay">
-  <button id="entryBtn">PRESS HERE TO SEE THE RESULTS OF NETHINETHERA</button>
+  <button id="entryBtn" disabled>LOADING ASSETS… 0%</button>
+  <div id="entryProgressWrap" class="visible">
+    <div id="entryProgressTrack"><div id="entryProgressBar"></div></div>
+    <div id="entryProgressLabel">LOADING ASSETS…</div>
+  </div>
   <div id="entrySubtitle">EMUMSC · Nethinethera 2026</div>
 </div>
 <div class="bg-orb o1"></div><div class="bg-orb o2"></div><div class="bg-orb o3"></div><div class="bg-orb o4"></div>
@@ -232,7 +249,7 @@ input[type="range"].vol-slider::-webkit-slider-thumb{-webkit-appearance:none;wid
   <div class="music-row" id="volRow">
     <div class="vol-row" style="width:100%">
       <span class="volume-icon">🔈</span>
-      <input type="range" class="vol-slider" id="volSlider" min="0" max="100" value="25">
+      <input type="range" class="vol-slider" id="volSlider" min="0" max="100" value="10">
       <span class="volume-icon">🔊</span>
     </div>
   </div>
@@ -328,7 +345,7 @@ const API_URL="https://osxijjbjgxvaeurpghtv.supabase.co/rest/v1/mpmu_votes?selec
 
 /* ══ AUDIO ENGINE ══ */
 class AudioEngine {
-  constructor(){this.ctx=null;this.bgSrc=null;this.bgGain=null;this.bgPlaying=false;this.on=true;this.vol=0.25;this.files={};this._10node=null}
+  constructor(){this.ctx=null;this.bgSrc=null;this.bgGain=null;this.bgPlaying=false;this.on=true;this.vol=0.10;this.files={};this._10node=null;this._bgFadeStarted=false}
   async init(){try{this.ctx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}
   async load(name,url){
     if(!this.ctx)return;
@@ -373,8 +390,15 @@ class AudioEngine {
     this._10node.gain.setValueAtTime(this._10node.gain.value,t);
     this._10node.gain.linearRampToValueAtTime(0,t+dur);
   }
-  // Play win/lose with 0.5s fade-in
-  playFinale(name){this._play(name,{volume:this.on?0.9:0,fadeIn:.5})}
+  // Play win/lose — ensure BG is fully stopped first
+  playFinale(name){
+    // Kill BG completely before starting win/lose
+    if(this.bgGain&&this.ctx){
+      try{this.bgGain.gain.cancelScheduledValues(this.ctx.currentTime);this.bgGain.gain.setValueAtTime(0,this.ctx.currentTime)}catch(e){}
+    }
+    if(this.bgSrc){try{this.bgSrc.stop()}catch(e){}this.bgSrc=null;this.bgPlaying=false}
+    this._play(name,{volume:this.on?0.9:0,fadeIn:.5});
+  }
   setBGVol(v){this.vol=v;if(this.bgGain&&this.ctx)this.bgGain.gain.setValueAtTime(v,this.ctx.currentTime)}
   setBGMute(m){this.on=!m;if(this.bgGain&&this.ctx)this.bgGain.gain.setValueAtTime(m?0:this.vol,this.ctx.currentTime)}
 }
@@ -817,20 +841,48 @@ gapCtx.forEach(c=>{
 });
 
 /* ══ BOOT ══ */
-async function bootApp(skipEntry){
+const entryProgressBar=document.getElementById("entryProgressBar");
+const entryProgressLabel=document.getElementById("entryProgressLabel");
+const entryProgressWrap=document.getElementById("entryProgressWrap");
+
+function setProgress(pct,label){
+  if(entryProgressBar)entryProgressBar.style.width=pct+"%";
+  if(entryProgressLabel)entryProgressLabel.textContent=label||("LOADING ASSETS… "+Math.round(pct)+"%");
+  if(entryBtn)entryBtn.textContent=label||("LOADING ASSETS… "+Math.round(pct)+"%");
+}
+
+async function preloadAssets(){
   await audio.init();
-  await Promise.allSettled([
-    audio.load("bg","./BG.mp3"),
-    audio.load("10sec","./10sec.mp3"),
-    audio.load("win","./Win.mp3"),
-    audio.load("lose","./Lose.mp3")
-  ]);
-  audio.startBG();
+  const tracks=[
+    {name:"bg",url:"./BG.mp3"},
+    {name:"10sec",url:"./10sec.mp3"},
+    {name:"win",url:"./Win.mp3"},
+    {name:"lose",url:"./Lose.mp3"}
+  ];
+  let done=0;
+  setProgress(0);
+  await Promise.all(tracks.map(t=>
+    audio.load(t.name,t.url).then(()=>{
+      done++;
+      setProgress(Math.round((done/tracks.length)*100));
+    })
+  ));
+  // All assets ready — enable button
+  if(entryBtn){
+    entryBtn.disabled=false;
+    entryBtn.textContent="PRESS HERE TO SEE THE RESULTS OF NETHINETHERA";
+    entryBtn.style.animation="entP 2s ease-in-out infinite";
+  }
+  if(entryProgressWrap)entryProgressWrap.style.opacity="0";
+}
+
+async function bootApp(skipEntry){
   initOrbs();
   renderCountdown();setInterval(renderCountdown,1000);
   await loadVotes();
   pollInterval=setInterval(loadVotes,POLL_MS);
   window.addEventListener("resize",()=>{if(starsCanvas.width>0)initStars()});
+  if(!skipEntry)audio.startBG();
 }
 
 /* ══ INIT — post-event bypass ══ */
@@ -842,20 +894,30 @@ async function bootApp(skipEntry){
     finaleTriggered=true;dramaticTriggered=true;audio._bgFadeStarted=true;
     gsap.set(entryOverlay,{autoAlpha:0,display:"none"});
     gsap.set(dashboard,{opacity:1,scale:1});
+    // Load BG.mp3 and start playing at 10% — all other audio irrelevant post-event
+    audio.init().then(async()=>{
+      await audio.load("bg","./BG.mp3");
+      audio.startBG();
+    });
     bootApp(true);
     return;
   }
 
-  // Pre-event: show entry overlay — but pre-load data in background
+  // Pre-event: disable button, start loading assets immediately
+  preloadAssets();
   loadVotes();// pre-warm data silently
 
   entryBtn.addEventListener("click",async()=>{
+    if(entryBtn.disabled)return;
     entryBtn.disabled=true;
-    // Simultaneously fade out overlay + scale/fade in dashboard (60fps via will-change)
-    gsap.set(dashboard,{opacity:0,scale:.96});
-    const tl=gsap.timeline({onComplete:()=>{entryOverlay.style.display="none"}});
-    tl.to(entryOverlay,{autoAlpha:0,duration:.7,ease:"power2.inOut"})
-      .to(dashboard,{opacity:1,scale:1,duration:.65,ease:"power3.out"},"<.15");
+    // GSAP timeline with force3D to prevent mobile stutter
+    gsap.set(dashboard,{opacity:0,scale:.96,force3D:true});
+    const tl=gsap.timeline({
+      force3D:true,
+      onComplete:()=>{entryOverlay.style.display="none"}
+    });
+    tl.to(entryOverlay,{autoAlpha:0,duration:.7,ease:"power2.inOut",force3D:true})
+      .to(dashboard,{opacity:1,scale:1,duration:.65,ease:"power3.out",force3D:true},"<.15");
     await bootApp(false);
   });
 })();
